@@ -1,0 +1,75 @@
+buildscript {
+    apply from: '../versions.gradle'
+}
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.albertson.codetest.acronymfinder'
+    compileSdk build_versions.compile_sdk
+
+    defaultConfig {
+        applicationId "com.albertson.codetest.acronymfinder"
+        minSdk build_versions.min_sdk
+        targetSdk build_versions.target_sdk
+        versionCode build_versions.version_code
+        versionName build_versions.version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+}
+
+dependencies {
+
+    //region android
+    implementation deps.android.core_ktx
+    implementation deps.android.appcompat
+    implementation deps.android.material
+    implementation deps.android.constraintlayout
+    implementation deps.android.livedata_ktx
+    implementation deps.android.viewmodel_ktx
+    //endregion
+
+    //region dagger
+    implementation deps.dagger.android
+    kapt deps.dagger.compiler
+    //endregion
+
+    //region networking
+    implementation deps.retrofit.converter_gson
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.coroutinesAdapter
+    implementation deps.okhttp.runtime
+    implementation deps.okhttp.logging_interceptor
+    //endregion
+
+    // test
+    testImplementation deps.test.junit
+    testImplementation deps.test.kotlin
+    testImplementation deps.test.kotlinx_coroutines
+    testImplementation deps.test.mockk
+    androidTestImplementation deps.android.junit
+    androidTestImplementation deps.android.espresso
+}

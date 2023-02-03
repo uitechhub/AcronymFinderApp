@@ -1,0 +1,83 @@
+ext.deps = [:]
+
+//region versions
+
+def build_versions = [:]
+build_versions.compile_sdk = 33
+build_versions.min_sdk = 14
+build_versions.target_sdk = 33
+build_versions.version_code = 1
+build_versions.version_name = "1.0"
+ext.build_versions = build_versions
+
+def versions = [:]
+versions.android_junit = "1.1.5"
+versions.appcompat = "1.6.0"
+versions.constraintlayout = "2.1.4"
+versions.core_ktx = "1.9.0"
+versions.coroutinesAdapter = "0.9.2"
+versions.dagger = "2.43.2"
+versions.espresso = "3.5.1"
+versions.kotlin_coroutines = "1.6.4"
+versions.kotlin_test = "1.7.10"
+versions.livedata_ktx = "2.5.1"
+versions.material = "1.8.0"
+versions.mockk = "1.13.4"
+versions.okhttp = "4.3.0"
+versions.retrofit = "2.8.1"
+versions.logging_interceptor = "4.10.0"
+versions.test_junit = "4.13.2"
+versions.viewmodel_ktx = "2.5.1"
+ext.versions = versions
+//endregion
+
+//region android
+def android = [:]
+android.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
+android.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+android.core_ktx = "androidx.core:core-ktx:$versions.core_ktx"
+android.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
+android.junit = "androidx.test.ext:junit:$versions.android_junit"
+android.livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.livedata_ktx"
+android.material = "com.google.android.material:material:$versions.material"
+android.viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.viewmodel_ktx"
+deps.android = android
+//endregion
+
+//region coroutines
+def kotlin = [:]
+kotlin.coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlin_coroutines"
+kotlin.coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlin_coroutines"
+deps.kotlin = kotlin
+//endregion
+
+//region di
+def dagger = [:]
+dagger.android = "com.google.dagger:dagger:$versions.dagger"
+dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+deps.dagger = dagger
+//endregion
+
+// region networking
+def retrofit = [:]
+retrofit.converter_gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.coroutinesAdapter = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.coroutinesAdapter"
+deps.retrofit = retrofit
+
+def okhttp = [:]
+okhttp.logging_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor"
+okhttp.runtime = "com.squareup.okhttp3:okhttp:$versions.okhttp"
+deps.okhttp = okhttp
+//endregion
+
+//region test
+def test = [:]
+test.junit = "junit:junit:$versions.test_junit"
+test.kotlinx_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlin_coroutines"
+test.kotlin = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin_test"
+test.mockk = "io.mockk:mockk:$versions.mockk"
+deps.test = test
+//endregion
+
+ext.deps = deps
